@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Viewer</title>
+  </head>
+  <body>
+    <h2>Watch Coach</h2>
+<video id="remoteVideo" autoplay playsinline></video>
+<p id="roomDisplay"></p>
+
+<div style="margin-top:20px;">
+  <h3>Chat</h3>
+  <div id="chat-box" style="height:200px; border:1px solid #aaa; padding:10px; overflow-y:scroll;"></div>
+  <input type="text" id="chat-input" placeholder="Type a message..." />
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const roomId = urlParams.get("room");
+      document.getElementById("roomDisplay").innerText = "Room: " + roomId;
+      startCamera(false, roomId); // viewer = false
+    </script>
+  </body>
+</html>

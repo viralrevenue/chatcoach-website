@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatCoach Rooms</title>
+  </head>
+  <body>
+    <h2>Welcome to ChatCoach!</h2>
+    <p>Select your role:</p>
+
+    <h3>Become a Coach</h3>
+    <input id="coach-room" placeholder="Enter room name (e.g. john-coach)" />
+    <button onclick="joinAsCoach()">Start Coaching</button>
+
+    <h3>Join as Viewer</h3>
+    <input id="viewer-room" placeholder="Enter coach room name" />
+    <button onclick="joinAsViewer()">Watch Coach</button>
+
+    <script>
+      function joinAsCoach() {
+        const room = document.getElementById("coach-room").value.trim();
+        if (!room) return alert("Enter a coach room name.");
+        window.location.href = `/coach.html?room=${room}`;
+      }
+
+      function joinAsViewer() {
+        const room = document.getElementById("viewer-room").value.trim();
+        if (!room) return alert("Enter a room name.");
+        window.location.href = `/viewer.html?room=${room}`;
+      }
+    </script>
+  </body>
+</html>
