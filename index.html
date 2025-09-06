@@ -1,32 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>ChatCoach Rooms</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHATCOACH.ONLINE</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Welcome to ChatCoach!</h2>
-    <p>Select your role:</p>
+    <header>
+      <h1>CHATCOACH.ONLINE NAMIBIA</h1>
+      <p>Your #1 Platform for Live Coaching with Airtime Tips</p>
+    </header>
 
-    <h3>Become a Coach</h3>
-    <input id="coach-room" placeholder="Enter room name (e.g. john-coach)" />
-    <button onclick="joinAsCoach()">Start Coaching</button>
+    <section id="bank-info">
+      <h2>📌 Platform Info</h2>
+      <p><strong>Owner Bank Account:</strong> 64279082124 (FNB) - Brance code (282672)</p>
+      <p>
+        <p>+264 81 374 0896</p>
+        Coaches must pay <strong>N$50 weekly</strong> via ETF every Friday to
+        remain active, or they will be <strong>blocked</strong>.
+      </p>
+      <p>
+        <strong>How It Works:</strong><br />
+        As a coach, you go live and teach topics like business registration,
+        TikTok growth, health, or any valuable skill.<br />
+        Viewers will tip you with <strong>airtime</strong> (MTC) as payment for
+        your coaching services.
+      </p>
+      <p>
+        You must <strong>sell that airtime at a discount</strong> (example: N$10
+        airtime sold for N$8 cash) to get your money faster. Many buyers want
+        10–30% discounts on airtime deals.
+      </p>
+      <p>
+        This model allows you to
+        <strong>turn airtime into real cash</strong> and grow your income using
+        your skills — without expensive bank systems or fees.
+      </p>
+    </section>
 
-    <h3>Join as Viewer</h3>
-    <input id="viewer-room" placeholder="Enter coach room name" />
-    <button onclick="joinAsViewer()">Watch Coach</button>
+    <video
+      id="webcam"
+      autoplay
+      playsinline
+      muted
+      width="320"
+      height="240"
+      style="display: none; border: 1px solid #ccc"
+    ></video>
+
+    <section id="create-profile">
+      <h2>Create Your Coach Profile</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="text" id="skill" placeholder="Profession or Skill" />
+      <input type="text" id="phone" placeholder="Cell Phone Number" />
+      <textarea
+        id="services"
+        placeholder="List services per tip, e.g. 2 - Business Reg, 5 - Tax Help"
+      ></textarea>
+      <button onclick="createProfile()">Create Profile</button>
+    </section>
+
+    <section id="coaches">
+      <h2>👨‍🏫 Coaches Live Now</h2>
+      <div id="coach-list"></div>
+    </section>
+
+    <button onclick="downloadAsJSON()">📥 Download as JSON</button>
+    <button onclick="downloadAsCSV()">📊 Download as CSV</button>
+
+    <button onclick="clearAllCoaches()" style="background: red">
+      🗑️ Clear All Profiles (Admin)
+    </button>
 
     <script>
-      function joinAsCoach() {
-        const room = document.getElementById("coach-room").value.trim();
-        if (!room) return alert("Enter a coach room name.");
-        window.location.href = `/coach.html?room=${room}`;
-      }
-
-      function joinAsViewer() {
-        const room = document.getElementById("viewer-room").value.trim();
-        if (!room) return alert("Enter a room name.");
-        window.location.href = `/viewer.html?room=${room}`;
-      }
+      // Ask for camera permission on load
+      window.addEventListener("DOMContentLoaded", () => {
+        const video = document.getElementById("webcam");
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: false })
+          .then((stream) => {
+            video.srcObject = stream;
+            video.style.display = "block";
+          })
+          .catch((error) => {
+            console.error("Camera access denied or not available:", error);
+          });
+      });
     </script>
+
+    <script src="script.js"></script>
   </body>
 </html>
